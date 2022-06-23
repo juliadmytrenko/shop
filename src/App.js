@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -27,8 +27,23 @@ const Filtering = styled(Paper)(({ theme }) => ({
 }));
 
 function App() {
-  const [products, setProducts] = useState(products_mock);
+  const [products, setProducts] = useState([]);
   const [limit, setLimit] = useState(5);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  // Fetch Data
+  const fetchAllProducts = () => {
+    // Call the API
+    fetch("http://localhost:3000/products")
+      .then((res) => res.json())
+      .then((json) => {
+        setProducts(json);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleShowMoreImages = () => {
     setLimit(limit + 5);
@@ -51,7 +66,7 @@ function App() {
             </Grid>
           ))}
           <Grid item xs={12}>
-            {limit < products_mock.length && (
+            {limit < products.length && (
               <Button onClick={handleShowMoreImages} variant="contained">
                 Load more
               </Button>
@@ -64,158 +79,3 @@ function App() {
 }
 
 export default App;
-
-const products_mock = [
-  {
-    id: 1,
-    title: "iPhone 9",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 2,
-    title: "iPhone 10",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 3,
-    title: "iPhone 1219",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 4,
-    title: "iPhone 459",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 5,
-    title: "iPhone 129",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 6,
-    title: "iPhone 49",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 7,
-    title: "iPhone 29",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-  {
-    id: 8,
-    title: "iPhone 119",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    images: [
-      "https://dummyjson.com/image/i/products/1/1.jpg",
-      "https://dummyjson.com/image/i/products/1/2.jpg",
-      "https://dummyjson.com/image/i/products/1/3.jpg",
-      "https://dummyjson.com/image/i/products/1/4.jpg",
-      "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-    ],
-  },
-];
