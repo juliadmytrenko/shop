@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Product from "./components/Product";
 import Button from "@mui/material/Button";
+import Filtering from "./components/Filtering.js";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
@@ -22,25 +23,85 @@ const Window = styled(Box)(({ theme }) => ({
   backgroundColor: "ghostwhite",
 }));
 
-const Filtering = styled(Paper)(({ theme }) => ({
-  minHeight: "10rem",
-}));
-
 function App() {
+  const defaultLimit = 3;
   const [products, setProducts] = useState([]);
-  const [limit, setLimit] = useState(5);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [limit, setLimit] = useState(defaultLimit);
+
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+
+  const handleBrandChange = (event) => {
+    setBrand(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
 
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
+  useEffect(() => {
+    if (brand && category) {
+      fetch(
+        `http://localhost:3000/products?brand=${brand}&category=${category}`
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          setProducts(json);
+          setLimit(defaultLimit);
+        })
+        .catch((err) => console.log(err));
+    } else if (brand) {
+      fetch(`http://localhost:3000/products?brand=${brand}`)
+        .then((res) => res.json())
+        .then((json) => {
+          setProducts(json);
+          setLimit(defaultLimit);
+        })
+        .catch((err) => console.log(err));
+    } else if (category) {
+      fetch(`http://localhost:3000/products?category=${category}`)
+        .then((res) => res.json())
+        .then((json) => {
+          setProducts(json);
+          setLimit(defaultLimit);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      fetch(`http://localhost:3000/products`)
+        .then((res) => res.json())
+        .then((json) => {
+          setProducts(json);
+          setLimit(defaultLimit);
+          const categories = [
+            ...new Set(json.map((product) => product.category)),
+          ];
+          setCategories(categories);
+          const brands = [...new Set(json.map((product) => product.brand))];
+          setBrands(brands);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [brand, category]);
+
   // Fetch Data
   const fetchAllProducts = () => {
     // Call the API
-    fetch("http://localhost:3000/products")
+    fetch(`http://localhost:3000/products`)
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
+        const categories = [
+          ...new Set(json.map((product) => product.category)),
+        ];
+        setCategories(categories);
+        const brands = [...new Set(json.map((product) => product.brand))];
+        setBrands(brands);
       })
       .catch((err) => console.log(err));
   };
@@ -58,7 +119,14 @@ function App() {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item xs={12}>
-            <Filtering elevation={0} variant="outlined"></Filtering>
+            <Filtering
+              categories={categories}
+              category={category}
+              handleCategoryChange={handleCategoryChange}
+              brands={brands}
+              brand={brand}
+              handleBrandChange={handleBrandChange}
+            ></Filtering>
           </Grid>
           {products.slice(0, limit).map((product) => (
             <Grid item xs={12}>
