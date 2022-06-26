@@ -24,6 +24,7 @@ const Image = styled(Avatar)(({ theme }) => ({
 }));
 
 const Text = styled(Box)(({ theme }) => ({
+  textAlign: 'center',
   flex: 1,
 }));
 

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
@@ -111,7 +110,7 @@ function App() {
               <Product product={product}></Product>
             </Grid>
           ))}
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{textAlign: 'center'}}>
             {limit < products.length && (
               <Button onClick={handleShowMoreImages} variant="contained">
                 Load more
