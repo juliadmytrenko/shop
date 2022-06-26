@@ -18,7 +18,7 @@ const Window = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   marginTop: theme.spacing(5),
   // marginBottom: theme.spacing(5),
-  backgroundColor: "ghostwhite",
+  backgroundColor: theme.palette.grey['100'],
 }));
 
 function App() {
