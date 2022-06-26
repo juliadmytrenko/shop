@@ -8,16 +8,16 @@ import Filtering from "./components/Filtering.js";
 import Paper from "@mui/material/Paper";
 
 const Wrapper = styled(Box)(({ theme }) => ({
-  minHeight: "100vh",
+  // minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
+  marginBottom: theme.spacing(5),
 }));
 
 const Window = styled(Paper)(({ theme }) => ({
   width: "50vw",
   padding: theme.spacing(5),
   marginTop: theme.spacing(5),
-  // marginBottom: theme.spacing(5),
   backgroundColor: theme.palette.grey['100'],
 }));
 
