@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 
 const Wrapper = styled(Paper)(({ theme }) => ({
   display: "flex",
+  flexWrap: "wrap",
   width: "100%",
   minHeight: "10rem",
   height: "100%",
@@ -18,6 +19,7 @@ const Wrapper = styled(Paper)(({ theme }) => ({
 const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
   height: 200,
+  minWidth: 150,
 }));
 const Image = styled(Avatar)(({ theme }) => ({
   width: "100%",
@@ -25,7 +27,7 @@ const Image = styled(Avatar)(({ theme }) => ({
 }));
 
 const Text = styled(Box)(({ theme }) => ({
-  textAlign: 'center',
+  textAlign: "center",
   flex: 1,
 }));
 
