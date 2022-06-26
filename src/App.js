@@ -5,19 +5,19 @@ import Grid from "@mui/material/Grid";
 import Product from "./components/Product";
 import Button from "@mui/material/Button";
 import Filtering from "./components/Filtering.js";
+import Paper from "@mui/material/Paper";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
 }));
 
-const Window = styled(Box)(({ theme }) => ({
+const Window = styled(Paper)(({ theme }) => ({
   width: "50vw",
   padding: theme.spacing(5),
   marginTop: theme.spacing(5),
-  marginBottom: theme.spacing(5),
+  // marginBottom: theme.spacing(5),
   backgroundColor: "ghostwhite",
 }));
 
