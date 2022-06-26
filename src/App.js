@@ -74,10 +74,10 @@ function App() {
         setProducts(json);
         setLimit(defaultLimit);
         const categories = [
-          ...new Set([json].map((product) => product.category)),
+          ...new Set([...json].map((product) => product.category)),
         ];
         setCategories(categories);
-        const brands = [...new Set([json].map((product) => product.brand))];
+        const brands = [...new Set([...json].map((product) => product.brand))];
         setBrands(brands);
       })
       .catch((err) => console.log(err));
