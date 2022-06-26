@@ -74,10 +74,10 @@ function App() {
         setProducts(json);
         setLimit(defaultLimit);
         const categories = [
-          ...new Set(json.map((product) => product.category)),
+          ...new Set([json].map((product) => product.category)),
         ];
         setCategories(categories);
-        const brands = [...new Set(json.map((product) => product.brand))];
+        const brands = [...new Set([json].map((product) => product.brand))];
         setBrands(brands);
       })
       .catch((err) => console.log(err));
@@ -105,12 +105,13 @@ function App() {
               handleBrandChange={handleBrandChange}
             ></Filtering>
           </Grid>
-          {products.slice(0, limit).map((product) => (
-            <Grid item xs={12}>
-              <Product product={product}></Product>
-            </Grid>
-          ))}
-          <Grid item xs={12} sx={{textAlign: 'center'}}>
+          {products.length > 0 &&
+            products.slice(0, limit).map((product, index) => (
+              <Grid item xs={12} key={index}>
+                <Product product={product}></Product>
+              </Grid>
+            ))}
+          <Grid item xs={12} sx={{ textAlign: "center" }}>
             {limit < products.length && (
               <Button onClick={handleShowMoreImages} variant="contained">
                 Load more
