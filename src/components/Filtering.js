@@ -40,8 +40,8 @@ function Filtering({
               onChange={handleBrandChange}
             >
               <MenuItem value={""}>None</MenuItem>
-              {brands.map((brand) => (
-                <MenuItem key={brand} value={brand}>
+              {brands.map((brand, index) => (
+                <MenuItem key={index} value={brand}>
                   {brand}
                 </MenuItem>
               ))}
@@ -59,8 +59,8 @@ function Filtering({
               onChange={handleCategoryChange}
             >
               <MenuItem value={""}>None</MenuItem>
-              {categories.map((category) => (
-                <MenuItem key={category} value={category}>
+              {categories.map((category, index) => (
+                <MenuItem key={index} value={category}>
                   {category}
                 </MenuItem>
               ))}
