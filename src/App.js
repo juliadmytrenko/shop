@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Product from "./components/Product";
@@ -24,7 +23,7 @@ const Window = styled(Box)(({ theme }) => ({
 }));
 
 function App() {
-  const defaultLimit = 3;
+  const defaultLimit = 5;
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -45,57 +44,36 @@ function App() {
     fetchAllProducts();
   }, []);
 
+  const fetchProducts = (URL) => {
+    fetch(URL)
+      .then((res) => res.json())
+      .then((json) => {
+        setProducts(json);
+        setLimit(defaultLimit);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     if (brand && category) {
-      fetch(
+      fetchProducts(
         `http://localhost:3000/products?brand=${brand}&category=${category}`
-      )
-        .then((res) => res.json())
-        .then((json) => {
-          setProducts(json);
-          setLimit(defaultLimit);
-        })
-        .catch((err) => console.log(err));
+      );
     } else if (brand) {
-      fetch(`http://localhost:3000/products?brand=${brand}`)
-        .then((res) => res.json())
-        .then((json) => {
-          setProducts(json);
-          setLimit(defaultLimit);
-        })
-        .catch((err) => console.log(err));
+      fetchProducts(`http://localhost:3000/products?brand=${brand}`);
     } else if (category) {
-      fetch(`http://localhost:3000/products?category=${category}`)
-        .then((res) => res.json())
-        .then((json) => {
-          setProducts(json);
-          setLimit(defaultLimit);
-        })
-        .catch((err) => console.log(err));
+      fetchProducts(`http://localhost:3000/products?category=${category}`);
     } else {
-      fetch(`http://localhost:3000/products`)
-        .then((res) => res.json())
-        .then((json) => {
-          setProducts(json);
-          setLimit(defaultLimit);
-          const categories = [
-            ...new Set(json.map((product) => product.category)),
-          ];
-          setCategories(categories);
-          const brands = [...new Set(json.map((product) => product.brand))];
-          setBrands(brands);
-        })
-        .catch((err) => console.log(err));
+      fetchAllProducts();
     }
   }, [brand, category]);
 
-  // Fetch Data
   const fetchAllProducts = () => {
-    // Call the API
     fetch(`http://localhost:3000/products`)
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
+        setLimit(defaultLimit);
         const categories = [
           ...new Set(json.map((product) => product.category)),
         ];
@@ -107,7 +85,7 @@ function App() {
   };
 
   const handleShowMoreImages = () => {
-    setLimit(limit + 5);
+    setLimit(limit + defaultLimit);
   };
 
   return (
