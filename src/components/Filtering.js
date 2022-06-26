@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-const Wrapper = styled(Paper)(({ theme }) => ({
+const Wrapper = styled(Box)(({ theme }) => ({
   minWidth: 120,
   padding: theme.spacing(3),
 }));
@@ -23,7 +23,7 @@ function Filtering({
   handleBrandChange,
 }) {
   return (
-    <Wrapper elevation={0} variant="outlined">
+    <Wrapper>
       <Grid
         container
         rowSpacing={{ xs: 1, sm: 2, md: 3 }}
