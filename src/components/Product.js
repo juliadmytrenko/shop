@@ -68,7 +68,7 @@ function Product({ product }) {
           label={<Typography>{priceAfterDiscound}</Typography>}
         />
 
-        <Typography>{product.description}</Typography>
+        <Typography mt={1}>{product.description}</Typography>
       </Text>
     </Wrapper>
   );
