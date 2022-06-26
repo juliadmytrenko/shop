@@ -17,7 +17,7 @@ const Wrapper = styled(Paper)(({ theme }) => ({
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
-  maxHeight: 250,
+  height: 200,
 }));
 const Image = styled(Avatar)(({ theme }) => ({
   width: "100%",
