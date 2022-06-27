@@ -14,7 +14,9 @@ const Wrapper = styled(Paper)(({ theme }) => ({
   minHeight: "10rem",
   height: "100%",
   position: "relative",
-  height: 250,
+  [theme.breakpoints.up("md")]: {
+    height: 250,
+  },
 }));
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
@@ -33,7 +35,7 @@ const Image = styled(Avatar)(({ theme }) => ({
 const Text = styled(Box)(({ theme }) => ({
   textAlign: "center",
   flex: 1,
-  marginLeft: theme.spacing(1)
+  marginLeft: theme.spacing(1),
 }));
 
 const LineThrough = styled(Typography)(({ theme }) => ({
@@ -105,7 +107,12 @@ function Product({ product }) {
         </Box>
 
         <Typography mt={1} mb={5} sx={{ textAlign: "left" }}>
-          {product.description}
+          {product.description
+            .split("", 130)
+            .reduce(
+              (o, c) => (o.length === 129 ? `${o}${c}...` : `${o}${c}`),
+              ""
+            )}
         </Typography>
 
         <LeftInStock mt={1} sx={{ fontSize: 14 }}>
