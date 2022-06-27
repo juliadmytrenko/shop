@@ -20,6 +20,9 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
   height: 250,
   minWidth: 200,
+  [theme.breakpoints.up('sm')]: {
+    minWidth: 200,
+  },
 }));
 const Image = styled(Avatar)(({ theme }) => ({
   width: "100%",

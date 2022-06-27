@@ -15,10 +15,13 @@ const Wrapper = styled(Box)(({ theme }) => ({
 }));
 
 const Window = styled(Paper)(({ theme }) => ({
-  width: "50vw",
+  width: "70vw",
   padding: theme.spacing(5),
   marginTop: theme.spacing(5),
   backgroundColor: theme.palette.white,
+  [theme.breakpoints.up('lg')]: {
+    width: "50vw",
+  },
 }));
 
 function App() {
