@@ -51,7 +51,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && products.length == 0) {
+    if (!isLoading && products.length === 0) {
       setNoProducts(true);
     } else {
       setNoProducts(false);
