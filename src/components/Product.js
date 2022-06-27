@@ -18,7 +18,7 @@ const Wrapper = styled(Paper)(({ theme }) => ({
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
-  height: 200,
+  height: 230,
   minWidth: 150,
 }));
 const Image = styled(Avatar)(({ theme }) => ({
@@ -33,6 +33,13 @@ const Text = styled(Box)(({ theme }) => ({
 
 const LineThrough = styled(Typography)(({ theme }) => ({
   textDecoration: "line-through",
+}));
+
+const LeftInStock = styled(Typography)(({ theme }) => ({
+  textAlign: "left",
+  position: "absolute",
+  bottom: theme.spacing(1),
+  color: theme.palette.primary.light,
 }));
 
 function Product({ product }) {
@@ -72,7 +79,9 @@ function Product({ product }) {
           label={<Typography>{priceAfterDiscound}</Typography>}
         />
 
-        <Typography mt={1}>{product.description}</Typography>
+        <Typography mt={1} mb={5} sx={{height: 80, textOverflow: 'ellipsis',}}>{product.description}</Typography>
+
+        <LeftInStock mt={1}>Left in stock: {product.stock}</LeftInStock>
       </Text>
     </Wrapper>
   );
