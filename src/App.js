@@ -129,9 +129,11 @@ function App() {
                 ))}
               <Grid item xs={12} sx={{ textAlign: "center" }}>
                 {limit < products.length && (
+                  <Box marginTop={1}>
                   <Button onClick={handleShowMoreImages} variant="contained">
                     Load more
                   </Button>
+                  </Box>
                 )}
               </Grid>
             </>
