@@ -14,6 +14,7 @@ const Wrapper = styled(Paper)(({ theme }) => ({
   minHeight: "10rem",
   height: "100%",
   position: "relative",
+  height: 250,
 }));
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
@@ -32,6 +33,7 @@ const Image = styled(Avatar)(({ theme }) => ({
 const Text = styled(Box)(({ theme }) => ({
   textAlign: "center",
   flex: 1,
+  marginLeft: theme.spacing(1)
 }));
 
 const LineThrough = styled(Typography)(({ theme }) => ({
@@ -53,7 +55,7 @@ function Product({ product }) {
 
   return (
     <Wrapper elevation={0} variant="outlined">
-      <ImageWrapper p={1}>
+      <ImageWrapper>
         <Image src={product.thumbnail} alt={product.title} variant="rounded" />
       </ImageWrapper>
       <Text p={1}>
