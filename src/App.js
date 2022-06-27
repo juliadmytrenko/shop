@@ -6,6 +6,7 @@ import Product from "./components/Product";
 import Button from "@mui/material/Button";
 import Filtering from "./components/Filtering.js";
 import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -30,6 +31,8 @@ function App() {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const handleBrandChange = (event) => {
     setBrand(event.target.value);
   };
@@ -48,6 +51,7 @@ function App() {
       .then((json) => {
         setProducts(json);
         setLimit(defaultLimit);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -78,6 +82,7 @@ function App() {
         setCategories(categories);
         const brands = [...new Set([...json].map((product) => product.brand))];
         setBrands(brands);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -104,19 +109,30 @@ function App() {
               handleBrandChange={handleBrandChange}
             ></Filtering>
           </Grid>
-          {products.length > 0 &&
-            products.slice(0, limit).map((product, index) => (
-              <Grid item xs={12} key={index}>
-                <Product product={product}></Product>
+          {isLoading && (
+            <Box
+              sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+            >
+              <CircularProgress color="secondary" sx={{ dusplay: "block" }} />
+            </Box>
+          )}
+          {!isLoading && (
+            <>
+              {products.length > 0 &&
+                products.slice(0, limit).map((product, index) => (
+                  <Grid item xs={12} key={index}>
+                    <Product product={product}></Product>
+                  </Grid>
+                ))}
+              <Grid item xs={12} sx={{ textAlign: "center" }}>
+                {limit < products.length && (
+                  <Button onClick={handleShowMoreImages} variant="contained">
+                    Load more
+                  </Button>
+                )}
               </Grid>
-            ))}
-          <Grid item xs={12} sx={{ textAlign: "center" }}>
-            {limit < products.length && (
-              <Button onClick={handleShowMoreImages} variant="contained">
-                Load more
-              </Button>
-            )}
-          </Grid>
+            </>
+          )}
         </Grid>
       </Window>
     </Wrapper>
