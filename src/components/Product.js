@@ -1,53 +1,16 @@
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
-import Avatar from "@mui/material/Avatar";
-
-const Wrapper = styled(Paper)(({ theme }) => ({
-  display: "flex",
-  flexWrap: "wrap",
-  width: "100%",
-  minHeight: "10rem",
-  height: "100%",
-  position: "relative",
-  [theme.breakpoints.up("md")]: {
-    height: 250,
-  },
-}));
-
-const ImageWrapper = styled(Box)(({ theme }) => ({
-  flex: 1,
-  height: 250,
-  minWidth: 200,
-  [theme.breakpoints.up("sm")]: {
-    minWidth: 200,
-  },
-}));
-const Image = styled(Avatar)(({ theme }) => ({
-  width: "100%",
-  height: "100%",
-}));
-
-const Text = styled(Box)(({ theme }) => ({
-  textAlign: "center",
-  flex: 1,
-  marginLeft: theme.spacing(1),
-}));
-
-const LineThrough = styled(Typography)(({ theme }) => ({
-  textDecoration: "line-through",
-}));
-
-const LeftInStock = styled(Typography)(({ theme }) => ({
-  textAlign: "left",
-  position: "absolute",
-  bottom: theme.spacing(1),
-  color: theme.palette.primary.light,
-}));
+import {
+  Wrapper,
+  ImageWrapper,
+  Image,
+  Text,
+  LineThrough,
+  LeftInStock,
+} from "./Product_mui";
 
 function Product({ product }) {
   const priceAfterDiscound = (
