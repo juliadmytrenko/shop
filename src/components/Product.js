@@ -18,8 +18,8 @@ const Wrapper = styled(Paper)(({ theme }) => ({
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
-  height: 230,
-  minWidth: 150,
+  height: 250,
+  minWidth: 200,
 }));
 const Image = styled(Avatar)(({ theme }) => ({
   width: "100%",
@@ -79,9 +79,30 @@ function Product({ product }) {
           label={<Typography>{priceAfterDiscound}</Typography>}
         />
 
-        <Typography mt={1} mb={5} sx={{height: 80, textOverflow: 'ellipsis',}}>{product.description}</Typography>
+        <Box sx={{ textAlign: "left" }}>
+          <Box sx={{ fontSize: 13 }}>
+            <Typography
+              sx={{ fontSize: 13, fontWeight: 700, display: "inline" }}
+            >
+              brand:
+            </Typography>{" "}
+            {product.brand}
+          </Box>
+          <Box sx={{ fontSize: 13 }}>
+            <Typography
+              sx={{ fontSize: 13, fontWeight: 700, display: "inline" }}
+            >
+              category:
+            </Typography>{" "}
+            {product.category}
+          </Box>
+        </Box>
 
-        <LeftInStock mt={1}>Left in stock: {product.stock}</LeftInStock>
+        <Typography mt={1} mb={5}  sx={{ textAlign: "left" }}>
+          {product.description}
+        </Typography>
+
+        <LeftInStock mt={1} sx={{fontSize: 14}}>Left in stock: {product.stock}</LeftInStock>
       </Text>
     </Wrapper>
   );
