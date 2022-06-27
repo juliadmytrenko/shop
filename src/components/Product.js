@@ -20,7 +20,7 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
   height: 250,
   minWidth: 200,
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up("sm")]: {
     minWidth: 200,
   },
 }));
@@ -72,12 +72,13 @@ function Product({ product }) {
         <Box mr={1} component="span">
           <Chip
             variant="outlined"
-            size="small"
             icon={<AttachMoneyIcon />}
             label={<LineThrough>{product.price}</LineThrough>}
+            color="error"
           />
         </Box>
         <Chip
+          variant="outlined"
           icon={<AttachMoneyIcon />}
           label={<Typography>{priceAfterDiscound}</Typography>}
         />
@@ -101,11 +102,13 @@ function Product({ product }) {
           </Box>
         </Box>
 
-        <Typography mt={1} mb={5}  sx={{ textAlign: "left" }}>
+        <Typography mt={1} mb={5} sx={{ textAlign: "left" }}>
           {product.description}
         </Typography>
 
-        <LeftInStock mt={1} sx={{fontSize: 14}}>Left in stock: {product.stock}</LeftInStock>
+        <LeftInStock mt={1} sx={{ fontSize: 14 }}>
+          Left in stock: {product.stock}
+        </LeftInStock>
       </Text>
     </Wrapper>
   );
