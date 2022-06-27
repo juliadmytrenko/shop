@@ -19,7 +19,7 @@ const Window = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   marginTop: theme.spacing(5),
   backgroundColor: theme.palette.white,
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up("lg")]: {
     width: "50vw",
   },
 }));
@@ -130,9 +130,9 @@ function App() {
               <Grid item xs={12} sx={{ textAlign: "center" }}>
                 {limit < products.length && (
                   <Box marginTop={1}>
-                  <Button onClick={handleShowMoreImages} variant="contained">
-                    Load more
-                  </Button>
+                    <Button onClick={handleShowMoreImages} variant="contained">
+                      Load more
+                    </Button>
                   </Box>
                 )}
               </Grid>
