@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Filtering from "./components/Filtering.js";
 import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -35,6 +36,7 @@ function App() {
   const [category, setCategory] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
+  const [noProducts, setNoProducts] = useState(false);
 
   const handleBrandChange = (event) => {
     setBrand(event.target.value);
@@ -47,6 +49,14 @@ function App() {
   useEffect(() => {
     fetchAllProducts();
   }, []);
+
+  useEffect(() => {
+    if (!isLoading && products.length == 0) {
+      setNoProducts(true);
+    } else {
+      setNoProducts(false);
+    }
+  }, [products, isLoading]);
 
   const fetchProducts = (URL) => {
     fetch(URL)
@@ -112,13 +122,14 @@ function App() {
               handleBrandChange={handleBrandChange}
             ></Filtering>
           </Grid>
-          {isLoading && (
-            <Box
-              sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-            >
+          <Box
+            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            {noProducts && <Alert severity="info">No products found.</Alert>}
+            {isLoading && (
               <CircularProgress color="secondary" sx={{ dusplay: "block" }} />
-            </Box>
-          )}
+            )}
+          </Box>
           {!isLoading && (
             <>
               {products.length > 0 &&
