@@ -11,6 +11,7 @@ import {
   LineThrough,
   LeftInStock,
 } from "./Product_mui";
+import { truncateText } from "./../utils";
 
 function Product({ product }) {
   const priceAfterDiscound = (
@@ -82,9 +83,3 @@ function Product({ product }) {
 }
 
 export default Product;
-
-const truncateText = (text, maxCharacters = 80) => {
-  return text
-    .split("", maxCharacters)
-    .reduce((o, c) => (o.length === (maxCharacters - 1) ? `${o}${c}...` : `${o}${c}`), "");
-};
