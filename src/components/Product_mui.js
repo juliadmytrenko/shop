@@ -20,7 +20,7 @@ export const Wrapper = styled(Paper)(({ theme }) => ({
 export const ImageWrapper = styled(Box)(({ theme }) => ({
   flex: 1,
   height: 250,
-  minWidth: 200,
+  minWidth: 250,
   [theme.breakpoints.up("sm")]: {
     minWidth: 200,
   },
@@ -31,6 +31,7 @@ export const Image = styled(Avatar)(({ theme }) => ({
 }));
 
 export const Text = styled(Box)(({ theme }) => ({
+  minWidth: 250,
   textAlign: "center",
   flex: 1,
   marginLeft: theme.spacing(1),

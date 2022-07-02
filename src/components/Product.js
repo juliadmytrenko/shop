@@ -70,12 +70,7 @@ function Product({ product }) {
         </Box>
 
         <Typography mt={1} mb={5} sx={{ textAlign: "left" }}>
-          {product.description
-            .split("", 130)
-            .reduce(
-              (o, c) => (o.length === 129 ? `${o}${c}...` : `${o}${c}`),
-              ""
-            )}
+          {truncateText(product.description)}
         </Typography>
 
         <LeftInStock mt={1} sx={{ fontSize: 14 }}>
@@ -87,3 +82,9 @@ function Product({ product }) {
 }
 
 export default Product;
+
+const truncateText = (text, maxCharacters = 80) => {
+  return text
+    .split("", maxCharacters)
+    .reduce((o, c) => (o.length === (maxCharacters - 1) ? `${o}${c}...` : `${o}${c}`), "");
+};
