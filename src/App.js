@@ -8,6 +8,7 @@ import Filtering from "./components/Filtering.js";
 import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
+import { Products } from "./components/Products";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -36,7 +37,6 @@ function App() {
   const [category, setCategory] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
-  const [noProducts, setNoProducts] = useState(false);
 
   const handleBrandChange = (event) => {
     setBrand(event.target.value);
@@ -49,14 +49,6 @@ function App() {
   useEffect(() => {
     fetchAllProducts();
   }, []);
-
-  useEffect(() => {
-    if (!isLoading && products.length === 0) {
-      setNoProducts(true);
-    } else {
-      setNoProducts(false);
-    }
-  }, [products, isLoading]);
 
   const fetchProducts = (URL) => {
     fetch(URL)
@@ -122,33 +114,14 @@ function App() {
               handleBrandChange={handleBrandChange}
             ></Filtering>
           </Grid>
-          <Box
-            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-          >
-            {noProducts && <Alert severity="info">No products found.</Alert>}
-            {isLoading && (
-              <CircularProgress color="secondary" sx={{ dusplay: "block" }} />
-            )}
-          </Box>
-          {!isLoading && (
-            <>
-              {products.length > 0 &&
-                products.slice(0, limit).map((product, index) => (
-                  <Grid item xs={12} key={index}>
-                    <Product product={product}></Product>
-                  </Grid>
-                ))}
-              <Grid item xs={12} sx={{ textAlign: "center" }}>
-                {limit < products.length && (
-                  <Box marginTop={1}>
-                    <Button onClick={handleShowMoreImages} variant="contained">
-                      Load more
-                    </Button>
-                  </Box>
-                )}
-              </Grid>
-            </>
-          )}
+          <Grid item xs={12}>
+            <Products
+              products={products}
+              limit={limit}
+              handleShowMoreImages={handleShowMoreImages}
+              isLoading={isLoading}
+            ></Products>
+          </Grid>
         </Grid>
       </Window>
     </Wrapper>
